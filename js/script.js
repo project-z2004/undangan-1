@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
   // COUNTDOWN
 // Tanggal acara
-const eventDate = new Date("December 5, 2025 21:03:00").getTime();
+const eventDate = new Date("2025-12-05T21:03:00").getTime();
 
 // Set interval tiap detik
 setInterval(() => {
@@ -153,3 +153,4 @@ setInterval(() => {
     return unsafe.replace(/[&<"']/g, function(m){ return ({'&':'&amp;','<':'&lt;','"':'&quot;',"'":'&#039;'}[m]) });
   }
 });
+
