@@ -1,31 +1,20 @@
 // Init libraries
 document.getElementById("openInv").addEventListener("click", function () {
 
-    // Sembunyikan cover
-    document.querySelector(".hero").classList.add("hide");
-
-    // Tampilkan konten utama
-    document.getElementById("mainContent").classList.remove("d-none");
-
     // Sembunyikan hero
     const hero = document.getElementById("hero");
     hero.classList.add("hidden");
 
-    // Scroll ke bagian mempelai
+    // Tampilkan konten
+    const main = document.getElementById("mainContent");
+    main.classList.remove("d-none");
+
+    // Scroll langsung ke mempelai
     setTimeout(() => {
-        const mempelai = document.getElementById("mempelai");
-
-        mempelai.scrollIntoView({ behavior: "smooth" });
-
-        // Kunci scroll agar tidak bisa kembali ke atas
-        window.addEventListener("scroll", function () {
-            if (window.scrollY < mempelai.offsetTop) {
-                window.scrollTo(0, mempelai.offsetTop);
-            }
+        document.getElementById("mempelai").scrollIntoView({
+            behavior: "smooth"
         });
-
-    }, 500);
-
+    }, 300);
 });
 
 
@@ -148,3 +137,4 @@ document.addEventListener("DOMContentLoaded", function(){
     return unsafe.replace(/[&<"']/g, function(m){ return ({'&':'&amp;','<':'&lt;','"':'&quot;',"'":'&#039;'}[m]) });
   }
 });
+
