@@ -7,6 +7,10 @@ document.getElementById("openInv").addEventListener("click", function () {
     // Tampilkan konten utama
     document.getElementById("mainContent").classList.remove("d-none");
 
+    // Sembunyikan hero
+    const hero = document.getElementById("hero");
+    hero.classList.add("hidden");
+
     // Scroll ke bagian mempelai
     setTimeout(() => {
         const mempelai = document.getElementById("mempelai");
