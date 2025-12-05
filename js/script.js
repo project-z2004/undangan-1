@@ -1,24 +1,20 @@
 // Init libraries
 document.getElementById("openInv").addEventListener("click", function () {
 
-    // Sembunyikan hero
-    const hero = document.getElementById("hero");
-    hero.classList.add("hidden");
+    // tampilkan konten utama
+    document.getElementById("mainContent").classList.remove("d-none");
 
-    // Tampilkan konten
-    const main = document.getElementById("mainContent");
-    main.classList.remove("d-none");
+    // play music (opsional)
+    const bgm = document.getElementById("bgm");
+    bgm.play().catch(()=>{});
 
-    // Scroll langsung ke mempelai
+    // animasi scroll ke bagian pertama konten
     setTimeout(() => {
-        document.getElementById("mempelai").scrollIntoView({
+        document.getElementById("mainContent").scrollIntoView({
             behavior: "smooth"
         });
     }, 300);
 });
-
-
-
 document.addEventListener("DOMContentLoaded", function(){
   AOS.init({duration:700, once:true, anchorPlacement:'top-bottom'});
   const lightbox = GLightbox({selector:'.glightbox'});
@@ -137,4 +133,3 @@ document.addEventListener("DOMContentLoaded", function(){
     return unsafe.replace(/[&<"']/g, function(m){ return ({'&':'&amp;','<':'&lt;','"':'&quot;',"'":'&#039;'}[m]) });
   }
 });
-
