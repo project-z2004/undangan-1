@@ -44,6 +44,32 @@ body{
   color:#2b2b2b;
 }
 
+
+#countdown {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.countdown-item {
+  background: #fff;
+  padding: 10px 15px;
+  border-radius: 10px;
+  text-align: center;
+  min-width: 70px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  font-size: 14px;
+}
+
+@media (max-width: 576px) {
+  .countdown-item {
+    min-width: 60px;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+}
+
 /* #hero.hidden {
   height: 0 !important;
   overflow: hidden !important;
@@ -274,6 +300,7 @@ body{
   .cover-inner{padding:1.5rem}
   .mempelai-img{width:120px;height:120px}
 }
+
 
 
 
