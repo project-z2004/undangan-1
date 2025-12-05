@@ -48,62 +48,82 @@ document.addEventListener("DOMContentLoaded", function(){
   bgm.addEventListener('play', updateMusicBtn);
   bgm.addEventListener('pause', updateMusicBtn);
 
-  // Countdown
-  const countdownEl = document.getElementById('countdown');
-  // set your event date here (YYYY, M-1, D, H, M, S)
-  const eventDate = new Date(2025, 0, 20, 8, 0, 0).getTime(); // 20 Jan 2025 08:00
+//   // Countdown
+//   const countdownEl = document.getElementById('countdown');
+//   // set your event date here (YYYY, M-1, D, H, M, S)
+//   const eventDate = new Date(2025, 0, 21, 12, 0, 0).getTime(); // 20 Jan 2025 08:00
 
-  function updateCountdown(){
-    const now = Date.now();
-    const diff = eventDate - now;
-    if(diff <= 0){
-      countdownEl.innerHTML = '<div class="text-success">Acara telah berlangsung</div>';
-      clearInterval(cdInterval);
-      return;
-    }
-    const days = Math.floor(diff / (1000*60*60*24));
-    const hours = Math.floor((diff / (1000*60*60)) % 24);
-    const mins = Math.floor((diff / (1000*60)) % 60);
-    const secs = Math.floor((diff / 1000) % 60);
+  // COUNTDOWN
+// Tanggal acara
+const eventDate = new Date("December 5, 2025 21:03:00").getTime();
 
-    countdownEl.innerHTML = `
-      <div>${days}<div class="small text-muted">Hari</div></div>
-      <div>${hours}<div class="small text-muted">Jam</div></div>
-      <div>${mins}<div class="small text-muted">Menit</div></div>
-      <div>${secs}<div class="small text-muted">Detik</div></div>
-    `;
-  }
-  updateCountdown();
-  const cdInterval = setInterval(updateCountdown, 1000);
+// Set interval tiap detik
+setInterval(() => {
+  
+  const now = new Date().getTime();             // Waktu sekarang
+  const distance = eventDate - now;             // Selisih waktu
+  
+  // Konversi ke hari / jam / menit / detik
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  // RSVP (localStorage simple)
-  const rsvpForm = document.getElementById('rsvpForm');
-  const rsvpList = document.getElementById('rsvpList');
-  const LS_KEY = 'wedding_rsvp_v1';
+  // Tampilkan ke HTML
+  document.getElementById("countdown").innerHTML = `
+    <div class="countdown-item"><strong>${days}</strong><br>Hari</div>
+    <div class="countdown-item"><strong>${hours}</strong><br>Jam</div>
+    <div class="countdown-item"><strong>${minutes}</strong><br>Menit</div>
+    <div class="countdown-item"><strong>${seconds}</strong><br>Detik</div>
+  `;
 
-  function loadRsvp(){
-    const raw = localStorage.getItem(LS_KEY);
-    if(!raw) return [];
-    try{ return JSON.parse(raw) } catch(e) { return [] }
-  }
-  function saveRsvp(arr){ localStorage.setItem(LS_KEY, JSON.stringify(arr)) }
+  // Jika acara sudah lewat
+  if (distance < 0) {
+  const cd = document.getElementById("countdown");
+  cd.innerHTML = "Acara telah dimulai!";
+  cd.style.color = "#ff4d4d";        // warna merah lembut
+  cd.style.fontWeight = "bold";      // huruf tebal
+  cd.style.fontSize = "24px";        // ukuran font lebih besar
+  cd.style.textAlign = "center";     // rata tengah
+  cd.style.marginTop = "10px";       // jarak atas
+}
 
-  function renderRsvp(){
-    const items = loadRsvp();
-    if(items.length === 0){
-      rsvpList.innerHTML = '<div class="text-muted small">Belum ada konfirmasi.</div>';
-      return;
-    }
-    rsvpList.innerHTML = items.map(it => `
-      <div class="rsvp-item d-flex justify-content-between align-items-center">
-        <div>
-          <strong>${escapeHtml(it.name)}</strong>
-          <div class="small text-muted">${escapeHtml(it.note)}</div>
-        </div>
-        <div class="small text-muted">${new Date(it.time).toLocaleString()}</div>
-      </div>
-    `).join('');
-  }
+}, 1000);
+
+
+
+
+//   updateCountdown();
+//   const cdInterval = setInterval(updateCountdown, 1000);
+
+//   // RSVP (localStorage simple)
+//   const rsvpForm = document.getElementById('rsvpForm');
+//   const rsvpList = document.getElementById('rsvpList');
+//   const LS_KEY = 'wedding_rsvp_v1';
+
+//   function loadRsvp(){
+//     const raw = localStorage.getItem(LS_KEY);
+//     if(!raw) return [];
+//     try{ return JSON.parse(raw) } catch(e) { return [] }
+//   }
+//   function saveRsvp(arr){ localStorage.setItem(LS_KEY, JSON.stringify(arr)) }
+
+//   function renderRsvp(){
+//     const items = loadRsvp();
+//     if(items.length === 0){
+//       rsvpList.innerHTML = '<div class="text-muted small">Belum ada konfirmasi.</div>';
+//       return;
+//     }
+//     rsvpList.innerHTML = items.map(it => `
+//       <div class="rsvp-item d-flex justify-content-between align-items-center">
+//         <div>
+//           <strong>${escapeHtml(it.name)}</strong>
+//           <div class="small text-muted">${escapeHtml(it.note)}</div>
+//         </div>
+//         <div class="small text-muted">${new Date(it.time).toLocaleString()}</div>
+//       </div>
+//     `).join('');
+//   }
 
   rsvpForm.addEventListener('submit', function(e){
     e.preventDefault();
