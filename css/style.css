@@ -34,7 +34,7 @@ body{
 }
 .hero.hide {
     opacity: 1;
-    transition: 10s ease;
+    transition: 0.8s ease;
     pointer-events: none;
 }
 
@@ -140,5 +140,6 @@ body{
   .cover-inner{padding:1.5rem}
   .mempelai-img{width:120px;height:120px}
 }
+
 
 
