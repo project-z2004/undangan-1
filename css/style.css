@@ -32,9 +32,19 @@ body{
   text-align:center;
   color:#2b2b2b;
 }
+
+#hero.hidden {
+  height: 0 !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  opacity: 0;
+  transition: 0.6s ease;
+}
+
 .hero.hide {
     opacity: 1;
-    transition: 0.1s ease;
+    transition: 0.8s ease;
     pointer-events: none;
 }
 
@@ -140,7 +150,3 @@ body{
   .cover-inner{padding:1.5rem}
   .mempelai-img{width:120px;height:120px}
 }
-
-
-
-
